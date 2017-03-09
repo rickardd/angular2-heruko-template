@@ -1,5 +1,7 @@
 # Angular2Heroku
 
+A template of a simple angular app deployed to heroku by following this guid. http://angularonrails.wpengine.com/deploy-angular-cli-webpack-project-heroku/
+
 This project was created with angular cli...
 
 - @angular/cli: 1.0.0-rc.1
