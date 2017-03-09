@@ -2,9 +2,9 @@
 
 This project was created with angular cli...
 
-@angular/cli: 1.0.0-rc.1
-node: 7.4.0
-npm 4.0.5
+- @angular/cli: 1.0.0-rc.1
+- node: 7.4.0
+- npm 4.0.5
 
 This is the stages I did in order to deploy to Heroku.
 Only javascript. The site will run on node on Heroku.
