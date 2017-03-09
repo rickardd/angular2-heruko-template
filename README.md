@@ -1,27 +1,60 @@
 # Angular2Heroku
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.1.
+This project was created with angular cli...
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+@angular/cli: 1.0.0-rc.1
+node: 7.4.0
+npm 4.0.5
 
-## Code scaffolding
+This is the stages I did in order to deploy to Heroku.
+Only javascript. The site will run on node on Heroku.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
 
-## Build
+### Package.json
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+- Two extra scripts **preinstall** and **postinstall**
+- Moved all dev-dependencies to normal dependensies.
+- Changed **ng serve** to **http-server**
 
-## Running unit tests
+```
+"scripts": {
+  "ng": "ng",
+  "start": "http-server",
+  "build": "ng build",
+  "test": "ng test",
+  "lint": "ng lint",
+  "e2e": "ng e2e",
+  "preinstall": "npm install -g http-server",
+  "postinstall": "ng build && mv dist/* ."
+}
+```
+postinstall runs the build and then moves the outputted folder to the roo.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Created a new Heroku app.
 
-## Running end-to-end tests
+```
+$ heroku create <name>
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+committed all changes with git and then pushed them to Heroku
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+$ git push heroku master
+```
+
+I think the scripts preinstall and post install was meant to run automatically. They didn't so I tried
+
+```
+$ heroku run npm preinstall
+$ heroku run npm postinstall
+```
+But that didn't work. I ended up run the scripts manually instead. Plus angular cli needed to be installed as well.
+
+This worked.
+
+```
+$ heroku run npm install -g @angular/cli
+$ heroku run npm install -g http-server
+$ heroku run ng build && mv dist/* .
+```
